@@ -9,14 +9,10 @@ use Scr\Service\ControllerService;
 class Route
 {
     protected $db;
-    private $request;
-    private $service;
 
     public function __construct(\PDO $db)
     {
         $this->db = $db;
-        $this->service = new ControllerService($this->db);
-        $this->request = new ControllerRequest($this->service);
         $this->start();
     }
 
@@ -33,6 +29,12 @@ class Route
             },
             \Scr\Controller\RegistrationAction::class => function(){
                 return new \Scr\Controller\RegistrationAction();
+            },
+            \Scr\Controller\WeatherAction::class => function(){
+                return new \Scr\Controller\WeatherAction();
+            },
+            \Scr\Controller\FeedbackController::class => function(){
+                return new \Scr\Controller\FeedbackController();
             }
         ];
 
@@ -40,11 +42,23 @@ class Route
             switch ($controllerName . '.' . $action){
                 case '.':
                     $controller = $controllers[\Scr\Controller\Controller::class]();
-                    echo $controller(new ControllerRequest(new ControllerService($this->db)));
+                    echo $controller();
                     break;
                 case 'registration.':
                     $controller = $controllers[\Scr\Controller\RegistrationAction::class]();
-                    echo $controller($this->request);
+                    echo $controller($this->db);
+                    break;
+                case 'weather.':
+                    $controller = $controllers[\Scr\Controller\WeatherAction::class]();
+                    echo $controller($this->db);
+                    break;
+                case 'feedback.':
+                    $controller = $controllers[\Scr\Controller\FeedbackController::class]();
+                    echo $controller();
+                    break;
+                case 'feedback.show':
+                    $controller = $controllers[\Scr\Controller\FeedbackController::class]();
+                    echo $controller->$action();
                     break;
             }
         }
