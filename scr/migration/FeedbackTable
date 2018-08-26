@@ -1,0 +1,10 @@
+CREATE TABLE feedback
+(
+    id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_user int unsigned DEFAULT null ,
+    name varchar(128),
+    email varchar(128),
+    msg text,
+    create_date timestamp DEFAULT current_timestamp
+);
+CREATE UNIQUE INDEX feedback_id_uindex ON feedback (id);

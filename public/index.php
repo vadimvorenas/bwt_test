@@ -3,10 +3,9 @@
 include_once '../vendor/autoload.php';
 include_once '../autoload.class.php';
 
-use Scr\Model\Parse;
+use Scr\Core;
 
-//var_dump(file_get_contents('https://www.gismeteo.ua/weather-zaporizhia-5093/'));
+session_start();
 
-$http = file_get_contents('https://www.gismeteo.ua/weather-zaporizhia-5093/');
-echo Parse::parse($http, '<div class="temp">', '<span class="meas">');
-
+$db = new Core\DB();
+$db = $db->connect();
