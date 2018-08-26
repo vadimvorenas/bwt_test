@@ -9,7 +9,12 @@
 namespace Scr\Request;
 
 
+use Scr\Service\ControllerService;
+
 class ControllerRequest
 {
-    
+    public function __construct(ControllerService $service)
+    {
+
+    }
 }

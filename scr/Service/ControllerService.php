@@ -11,5 +11,7 @@ namespace Scr\Service;
 
 class ControllerService
 {
-
+        public function __construct(\PDO $db)
+        {
+        }
 }
