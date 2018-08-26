@@ -1,0 +1,13 @@
+{
+  "name": "vadimvorenas/bwt_test",
+  "description": "bwt_test",
+  "authors": [
+    {
+      "name": "Vadim",
+      "email": "vadimvorenas@gmail.com"
+    }
+  ],
+  "require": {
+
+  }
+}
