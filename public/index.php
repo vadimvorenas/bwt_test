@@ -9,3 +9,4 @@ session_start();
 
 $db = new Core\DB();
 $db = $db->connect();
+new Core\Route($db);

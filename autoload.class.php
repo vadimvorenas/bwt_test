@@ -190,3 +190,4 @@ $autoloader = new Psr4AutoloaderClass();
 $autoloader->register();
 $autoloader->addNamespace('Scr\Model', __DIR__ . '/scr/model');
 $autoloader->addNamespace('Scr\Core', __DIR__ . '/scr/core');
+$autoloader->addNamespace('Scr\Controller', __DIR__ . '/scr/controller');
