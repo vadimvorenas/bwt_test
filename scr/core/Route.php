@@ -28,10 +28,10 @@ class Route
                 return new \Scr\Controller\Controller();
             },
             \Scr\Controller\RegistrationAction::class => function(){
-                return new \Scr\Controller\RegistrationAction();
+                return new \Scr\Controller\RegistrationAction($this->db);
             },
             \Scr\Controller\WeatherAction::class => function(){
-                return new \Scr\Controller\WeatherAction();
+                return new \Scr\Controller\WeatherAction($this->db);
             },
             \Scr\Controller\FeedbackController::class => function(){
                 return new \Scr\Controller\FeedbackController();
@@ -46,11 +46,15 @@ class Route
                     break;
                 case 'registration.':
                     $controller = $controllers[\Scr\Controller\RegistrationAction::class]();
-                    echo $controller($this->db);
+                    echo $controller->add();
+                    break;
+                case 'registration.in':
+                    $controller = $controllers[\Scr\Controller\RegistrationAction::class]();
+                    echo $controller->$action();
                     break;
                 case 'weather.':
                     $controller = $controllers[\Scr\Controller\WeatherAction::class]();
-                    echo $controller($this->db);
+                    echo $controller();
                     break;
                 case 'feedback.':
                     $controller = $controllers[\Scr\Controller\FeedbackController::class]();

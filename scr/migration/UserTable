@@ -6,6 +6,7 @@ CREATE TABLE users
     lastname varchar(128),
     email varchar(128),
     password varchar(255),
+    deleted tinyint(3) unsigned,
     gender int(3) DEFAULT null ,
     date_birth timestamp DEFAULT null ,
     create_date timestamp DEFAULT current_timestamp

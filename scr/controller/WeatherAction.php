@@ -10,13 +10,26 @@ namespace Scr\Controller;
 
 
 use Scr\Core\Templater;
+use Scr\Model\Parse;
+use Scr\Model\UserModel;
 
-class WeatherAction
+class WeatherAction extends UserModel
 {
-
-    public function __invoke(\PDO $db)
+    public function __construct(\PDO $db)
     {
-        return Templater::view('weather');
+        parent::__construct($db);
+    }
+
+    public function __invoke()
+    {
+        if ($this->issAuth()) {
+            $http = file_get_contents('https://www.gismeteo.ua/weather-zaporizhia-5093/');
+            $weather = Parse::parse($http, '<div class="temp">', '<span class="meas">');
+            return Templater::view('weather', ['weather' => $weather]);
+        }
+        else{
+            header("Location:../public");
+        }
         // TODO: Implement __invoke() method.
     }
 }

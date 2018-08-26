@@ -1,1 +1,1 @@
-<p class="lead">Weather now</p>
+<p class="lead">Weather now<?= $weather?></p>

@@ -9,11 +9,10 @@
 namespace Scr\Controller;
 
 use Scr\Core\Templater;
-use Scr\Request\ControllerRequest;
 
 class Controller
 {
-    public function __invoke(ControllerRequest $request)
+    public function __invoke()
     {
         return Templater::view('index');
     }
