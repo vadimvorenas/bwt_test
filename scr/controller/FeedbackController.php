@@ -8,20 +8,74 @@
 
 namespace Scr\Controller;
 
-
+use Scr\Model\UserModel;
 use Scr\Core\Templater;
+use Scr\Core\System;
+use Scr\Model\FeedbackModel;
 
-class FeedbackController
+class FeedbackController extends UserModel
 {
+    protected $model;
+
+    public function __construct(\PDO $db)
+    {
+        $this->model = new FeedbackModel($db);
+        parent::__construct($db);
+    }
 
     public function __invoke()
     {
-        return Templater::view('feedback');
-        // TODO: Implement __invoke() method.
+        if (count($_POST) > 0) {
+            $email      = System::trimName((string)$_POST['email'] ?? null);
+            $name       = System::trimName((string)$_POST['name'] ?? '');
+            $text       = System::trimName((string)$_POST['text'] ?? '');
+            $user = $this->getUserByEmail((string) $_SESSION['login']) ?? '';
+
+            $msgName = $this->chekedName() === true ? '' : $this->chekedName();
+            $msgEmail = ($email != '') ? '' : 'Required value';
+            $msgText = $this->chekedText() === true ? '' : $this->chekedText();
+            $refferer   = $_GET['refferer'] ?? '../public';
+
+            if ($this->chekedText() === true) {
+                if ($this->chekedName() === true && filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+                    $this->model->addFeedback($name, $email, $text, $user['id']);
+
+                    header("Location:$refferer");
+                    exit();
+                }
+            }
+
+
+        }
+        else{
+            if ($this->issAuth()) {
+                $user = $this->getUserByEmail($_SESSION['login']);
+                return Templater::view('feedback', [
+                    'name' => $user['username'],
+                    'email' => $user['email']
+                ]);
+            } else {
+                return Templater::view('feedback');
+            }
+        }
+
+        return $this->inner = Templater::view('feedback', [
+            'email' => $email,
+            'msgText' => $msgText,
+            'name' => $name,
+            'text' => $text,
+            'msgEmail' => $msgEmail,
+            'msgName' => $msgName,
+        ]);
     }
 
     public function show()
     {
-        return Templater::view('feedbackShow');
+        if ($this->issAuth()) {
+            return Templater::view('feedbackShow', ['feedback' => $this->model->getAllFeedback()]);
+        }
+        else{
+            header("Location:../public");
+        }
     }
 }

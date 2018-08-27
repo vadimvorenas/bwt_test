@@ -8,6 +8,7 @@
 
 namespace Scr\Model;
 
+use Scr\Core\System;
 
 class SystemModel
 {
@@ -53,6 +54,59 @@ class SystemModel
             }
         }
         return $this->auth;
+    }
+
+    public function chekedName()
+    {
+        $name       = System::trimName((string)$_POST['name']) ?? '';
+
+        if (mb_strlen($name) <= 128 && $name!='' && mb_strlen($name) >= 4){
+            if (System::check($name, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+                return true;
+            }
+            else{
+                return $msg = 'Неверный формат';
+            }
+        }
+        else{
+            return $msg= 'Имя не должно быть пустым or length - min:4, max:128';
+        }
+
+    }
+
+    public function chekedText()
+    {
+        $name       = System::trimName((string)$_POST['text']) ?? '';
+
+        if (mb_strlen($name) <= 500 && $name!='' && mb_strlen($name) >= 4){
+            if (System::check($name, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+                return true;
+            }
+            else{
+                return $msg = 'Неверный формат';
+            }
+        }
+        else{
+            return $msg= 'Имя не должно быть пустым or length - min:4, max:500';
+        }
+
+    }
+
+    public function chekedLastname()
+    {
+        $lastname   = System::trimName((string)$_POST['lastname']) ?? '';
+
+        if (mb_strlen($lastname) <= 128 && $lastname!='' && mb_strlen($lastname) >= 4){
+            if (System::check($lastname, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+                return true;
+            }
+            else{
+                return $msg = 'Неверный формат';
+            }
+        }
+        else{
+            return $msg = 'Lastname не должно быть пустым or length - min:4, max:128';
+        }
     }
 
     /**

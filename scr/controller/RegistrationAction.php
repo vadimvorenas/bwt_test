@@ -16,6 +16,7 @@ class RegistrationAction
 {
     protected $db;
     protected $name;
+    protected $user;
 
 
     public function __construct(\PDO $db)
@@ -76,11 +77,11 @@ class RegistrationAction
             $login_hash = '';
             $id = '';
             $password_hash = '';
-            $msgName = $this->chekedName() === true ? '' : $this->chekedName();
-            $msgLastname = $this->chekedLastname() === true ? '' : $this->chekedLastname();
+            $msgName = $this->user->chekedName() === true ? '' : $this->user->chekedName();
+            $msgLastname = $this->user->chekedLastname() === true ? '' : $this->user->chekedLastname();
             $msgEmail = ($email != '') ? '' : 'Required value';
 
-            if ($this->chekedName() && $this->chekedLastname()) {
+            if ($this->user->chekedName() === true && $this->user->chekedLastname() === true) {
                 if ($password === $passwrod_confirmation
                     && $password != ''
                     && mb_strlen($password) >= 6
@@ -133,7 +134,7 @@ class RegistrationAction
     {
         $msg = '';
         if (count($_POST ) > 0) {
-            $refferer = $_GET['refferer'] ?? '../articles';
+            $refferer = $_GET['refferer'] ?? '../public';
             if (!empty($_POST['out'])) {
                 $_SESSION['auth'] = false;
                 setcookie('login', 0, time() - 3600 * 24 * 365);
@@ -152,38 +153,4 @@ class RegistrationAction
         ]);
     }
 
-    protected function chekedName()
-    {
-        $name       =(string) System::trimName($_POST['name']) ?? '';
-
-        if (mb_strlen($name) <= 128 && $name!='' && mb_strlen($name) >= 4){
-            if (System::check($name, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
-                return true;
-            }
-            else{
-                return $msg = 'Неверный формат';
-            }
-        }
-        else{
-            return $msg= 'Имя не должно быть пустым or length - min:4, max:128';
-        }
-
-    }
-
-    protected function chekedLastname()
-    {
-        $lastname   =(string) System::trimName($_POST['lastname']) ?? '';
-
-        if (mb_strlen($lastname) <= 128 && $lastname!='' && mb_strlen($lastname) >= 4){
-            if (System::check($lastname, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
-                return true;
-            }
-            else{
-                return $msg = 'Неверный формат';
-            }
-        }
-        else{
-            return $msg = 'Lastname не должно быть пустым or length - min:4, max:128';
-        }
-    }
 }

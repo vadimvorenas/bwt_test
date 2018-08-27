@@ -16,6 +16,7 @@ class UserModel extends SystemModel
     protected $db;
     private $table_name = 'users';
 
+
     public function __construct(\PDO $db, $auth = false)
     {
         $this->db = $db;

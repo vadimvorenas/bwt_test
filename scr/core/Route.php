@@ -34,7 +34,7 @@ class Route
                 return new \Scr\Controller\WeatherAction($this->db);
             },
             \Scr\Controller\FeedbackController::class => function(){
-                return new \Scr\Controller\FeedbackController();
+                return new \Scr\Controller\FeedbackController($this->db);
             }
         ];
 

@@ -7,8 +7,8 @@ CREATE TABLE users
     email varchar(128),
     password varchar(255),
     deleted tinyint(3) unsigned,
-    gender int(3) DEFAULT null ,
-    date_birth timestamp DEFAULT null ,
+    gender varchar(8) DEFAULT null ,
+    date_birth varchar(16) DEFAULT null ,
     create_date timestamp DEFAULT current_timestamp
 );
 CREATE UNIQUE INDEX users_id_uindex ON users (id);
