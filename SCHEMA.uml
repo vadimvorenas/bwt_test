@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>4d41b633-67cd-433c-8866-73bdfbff1e35.SCHEMA:btwTest</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">4d41b633-67cd-433c-8866-73bdfbff1e35.TABLE:btwTest.users</node>
+    <node x="239.0" y="-3.0">4d41b633-67cd-433c-8866-73bdfbff1e35.TABLE:btwTest.feedback</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="208.0" y="115.0" />
+  <SelectedNodes>
+    <node>4d41b633-67cd-433c-8866-73bdfbff1e35.TABLE:btwTest.feedback</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
