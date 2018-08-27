@@ -59,7 +59,7 @@ $(document).ready(function(){
 
             text:{
                 required: true,
-                regx: /^[\w]+/i,
+                regx: /[\w]/u,
                 minlength: 4,
                 maxlength: 1000,
             },

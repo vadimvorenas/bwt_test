@@ -76,10 +76,10 @@ class SystemModel
 
     public function chekedText()
     {
-        $name       = System::trimName((string)$_POST['text']) ?? '';
+        $text       = System::trimName((string)$_POST['text']) ?? '';
 
-        if (mb_strlen($name) <= 1000 && $name!='' && mb_strlen($name) >= 4){
-            if (!System::check($name) || true){
+        if (mb_strlen($text) <= 1000 && $text!='' && mb_strlen($text) >= 4){
+            if (System::check($text, '/[\w]/u') ){
                 return true;
             }
             else{
