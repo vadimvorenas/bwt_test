@@ -5,6 +5,7 @@
     <script src="/js/jquery-validation-master/dist/jquery.validate.min.js"></script>
     <script src="/js/check.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link rel="stylesheet" href="/css/style.css" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
     <meta charset="UTF-8">
     <meta name="viewport"

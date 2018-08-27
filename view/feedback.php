@@ -1,5 +1,5 @@
     <div class="col-md-5 col-md-offset-3">
-        <form method="post">
+        <form method="post" id="js-feedback-form">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Name" value="<?= $name ?? ''?>">

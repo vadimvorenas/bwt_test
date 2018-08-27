@@ -19,7 +19,7 @@ class System
         // TODO: Implement trimName() method.
     }
 
-    public static function check($title, $pattern = "/[^0-9a-zа-пр-яё]+/i")
+    public static function check($title, $pattern = "/^[0-9a-zа-пр-яё]+$/i")
     {
         $res = preg_match($pattern, $title);
         return $res;

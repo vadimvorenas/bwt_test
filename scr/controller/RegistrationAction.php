@@ -94,6 +94,7 @@ class RegistrationAction
 
                         if ($this->user->decodeHash($email, $login_hash) && $this->user->decodeHash($password, $password_hash)) {
                             $_SESSION['auth'] = true;
+                            $_SESSION['login'] = $email;
 
                             if (isset($_POST['saveMe'])) {
                                 setcookie('login', $this->user->encodeHash($email), time() + 3600 * 24 * 7);

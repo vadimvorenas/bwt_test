@@ -61,11 +61,11 @@ class SystemModel
         $name       = System::trimName((string)$_POST['name']) ?? '';
 
         if (mb_strlen($name) <= 128 && $name!='' && mb_strlen($name) >= 4){
-            if (System::check($name, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+            if (System::check($name)){
                 return true;
             }
             else{
-                return $msg = 'Неверный формат Name';
+                return $msg = 'Wrong format Name';
             }
         }
         else{
@@ -79,11 +79,11 @@ class SystemModel
         $name       = System::trimName((string)$_POST['text']) ?? '';
 
         if (mb_strlen($name) <= 1000 && $name!='' && mb_strlen($name) >= 4){
-            if (!System::check($name /*"~^[a-zа-пр-яё\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i"*/)){
+            if (!System::check($name) || true){
                 return true;
             }
             else{
-                return $msg = 'Неверный формат Text';
+                return $msg = 'Wrong format Text';
             }
         }
         else{
@@ -97,11 +97,11 @@ class SystemModel
         $lastname   = System::trimName((string)$_POST['lastname']) ?? '';
 
         if (mb_strlen($lastname) <= 128 && $lastname!='' && mb_strlen($lastname) >= 4){
-            if (System::check($lastname, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+            if (System::check($lastname)){
                 return true;
             }
             else{
-                return $msg = 'Неверный формат Lastname';
+                return $msg = 'Wrong format Lastname';
             }
         }
         else{

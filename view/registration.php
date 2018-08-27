@@ -35,7 +35,7 @@
                 <div id="idpass"></div>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password Confirmation*</label>
+                <label for="exampleInputPassword2">Password Confirmation*</label>
                 <input type="password" class="form-control" name="password_confirmation" id="exampleInputPassword2" placeholder="Password Confirmation">
             </div>
 
