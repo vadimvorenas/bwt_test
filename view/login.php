@@ -19,15 +19,6 @@
             <?= $msgIs?>
         </div>
     <? endif;?>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password Confirmation</label>
-        <input type="password" class="form-control" name="password_confirmation" id="exampleInputPassword1" placeholder="Password Confirmation">
-    </div>
-    <? if (isset($msg) && $msg != ''):?>
-        <div class="alert alert-warning">
-            <?= $msg?>
-        </div>
-    <? endif;?>
     <div class="checkbox">
         <label>
             <input type="checkbox" name="saveMe"> Save me

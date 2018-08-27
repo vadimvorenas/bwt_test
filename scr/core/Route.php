@@ -52,6 +52,10 @@ class Route
                     $controller = $controllers[\Scr\Controller\RegistrationAction::class]();
                     echo $controller->$action();
                     break;
+                case 'registration.out':
+                    $controller = $controllers[\Scr\Controller\RegistrationAction::class]();
+                    echo $controller->$action();
+                    break;
                 case 'weather.':
                     $controller = $controllers[\Scr\Controller\WeatherAction::class]();
                     echo $controller();

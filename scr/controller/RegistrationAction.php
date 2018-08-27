@@ -30,12 +30,10 @@ class RegistrationAction
         if (count($_POST) > 0){
             $email      =(string) System::trimName($_POST['email']);
             $password   =(string) System::trimName($_POST['password']);
-            $passwrod_confirmation = (string) System::trimName($_POST['password_confirmation']);
             $user = $this->user->getUserByEmail($email);
             $refferer   = $_GET['refferer'] ?? '/public/weather';
             $msgIs = $email == '' && $password == '' ? 'Required value' : '';
 
-            if ($password === $passwrod_confirmation) {
                 if ($this->user->decodeHash($password, (string)$user['password'])) {
                     $_SESSION['auth'] = true;
                     $_SESSION['login'] = $email;
@@ -53,7 +51,7 @@ class RegistrationAction
             else{
                 $msg = 'Passwords are incorrect';
             }
-        }
+
 
         return $this->inner = Templater::view('login', [
             'email' => $email,
@@ -134,9 +132,10 @@ class RegistrationAction
     {
         $msg = '';
         if (count($_POST ) > 0) {
-            $refferer = $_GET['refferer'] ?? '../public';
+            $refferer = $_GET['refferer'] ?? 'http://bwttest/public';
             if (!empty($_POST['out'])) {
                 $_SESSION['auth'] = false;
+                $_SESSION['login'] = false;
                 setcookie('login', 0, time() - 3600 * 24 * 365);
                 setcookie('pass', 0, time() - 3600 * 24 * 365);
             }
