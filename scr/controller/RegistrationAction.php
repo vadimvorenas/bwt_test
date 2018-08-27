@@ -31,7 +31,7 @@ class RegistrationAction
             $email      =(string) System::trimName($_POST['email']);
             $password   =(string) System::trimName($_POST['password']);
             $user = $this->user->getUserByEmail($email);
-            $refferer   = $_GET['refferer'] ?? '/public/weather';
+            $refferer   = $_GET['refferer'] ?? '/weather';
             $msgIs = $email == '' && $password == '' ? 'Required value' : '';
 
                 if ($this->user->decodeHash($password, (string)$user['password'])) {
@@ -71,7 +71,7 @@ class RegistrationAction
             $date_birth = System::trimName((string)$_POST['date_birth'] ?? '');
             $passwrod_confirmation = (string) System::trimName((string)$_POST['password_confirmation' ?? '']);
 
-            $refferer   = $_GET['refferer'] ?? 'weather';
+            $refferer   = $_GET['refferer'] ?? '/weather';
             $login_hash = '';
             $id = '';
             $password_hash = '';
@@ -79,7 +79,8 @@ class RegistrationAction
             $msgLastname = $this->user->chekedLastname() === true ? '' : $this->user->chekedLastname();
             $msgEmail = ($email != '') ? '' : 'Required value';
 
-            if ($this->user->chekedName() === true && $this->user->chekedLastname() === true) {
+
+            if ($this->user->chekedName() === true && $this->user->chekedLastname() === true && System::reCaptcha()) {
                 if ($password === $passwrod_confirmation
                     && $password != ''
                     && mb_strlen($password) >= 6
@@ -113,6 +114,9 @@ class RegistrationAction
                     $msg = 'Пароли не совпадают or length password min:6';
                 }
             }
+            else {
+                $msg = 'The captcha code was not tested on the server1';
+            }
         }
 
         return $this->inner = Templater::view('registration', [
@@ -132,7 +136,7 @@ class RegistrationAction
     {
         $msg = '';
         if (count($_POST ) > 0) {
-            $refferer = $_GET['refferer'] ?? 'http://bwttest/public';
+            $refferer = $_GET['refferer'] ?? '/';
             if (!empty($_POST['out'])) {
                 $_SESSION['auth'] = false;
                 $_SESSION['login'] = false;

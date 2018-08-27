@@ -28,7 +28,7 @@ class WeatherAction extends UserModel
             return Templater::view('weather', ['weather' => $weather]);
         }
         else{
-            header("Location:../public");
+            header("Location:/");
         }
         // TODO: Implement __invoke() method.
     }

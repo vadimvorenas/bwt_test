@@ -65,11 +65,11 @@ class SystemModel
                 return true;
             }
             else{
-                return $msg = 'Неверный формат';
+                return $msg = 'Неверный формат Name';
             }
         }
         else{
-            return $msg= 'Имя не должно быть пустым or length - min:4, max:128';
+            return $msg= 'Name не должно быть пустым or length - min:4, max:128';
         }
 
     }
@@ -78,16 +78,16 @@ class SystemModel
     {
         $name       = System::trimName((string)$_POST['text']) ?? '';
 
-        if (mb_strlen($name) <= 500 && $name!='' && mb_strlen($name) >= 4){
-            if (System::check($name, '~^[a-z\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i')){
+        if (mb_strlen($name) <= 1000 && $name!='' && mb_strlen($name) >= 4){
+            if (!System::check($name /*"~^[a-zа-пр-яё\d][a-zа-пр-яё\d]*[_-]?[a-zа-пр-яё\d]*[a-zа-пр-яё\d]$~i"*/)){
                 return true;
             }
             else{
-                return $msg = 'Неверный формат';
+                return $msg = 'Неверный формат Text';
             }
         }
         else{
-            return $msg= 'Имя не должно быть пустым or length - min:4, max:500';
+            return $msg= 'Text не должно быть пустым or length - min:4, max:1000';
         }
 
     }
@@ -101,7 +101,7 @@ class SystemModel
                 return true;
             }
             else{
-                return $msg = 'Неверный формат';
+                return $msg = 'Неверный формат Lastname';
             }
         }
         else{

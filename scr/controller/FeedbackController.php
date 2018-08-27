@@ -31,17 +31,27 @@ class FeedbackController extends UserModel
             $text       = System::trimName((string)$_POST['text'] ?? '');
             $user = $this->getUserByEmail((string) $_SESSION['login']) ?? '';
 
-            $msgName = $this->chekedName() === true ? '' : $this->chekedName();
-            $msgEmail = ($email != '') ? '' : 'Required value';
-            $msgText = $this->chekedText() === true ? '' : $this->chekedText();
-            $refferer   = $_GET['refferer'] ?? '../public';
+            $msgName = $this->chekedName() === true ? true : $this->chekedName();
+            $msgEmail = $email != '' ? '' : 'Required value';
+            $msgText = $this->chekedText() === true ? true : $this->chekedText();
+            $refferer   = $_GET['refferer'] ?? '/';
+            $msg = '';
 
             if ($this->chekedText() === true) {
-                if ($this->chekedName() === true && filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-                    $this->model->addFeedback($name, $email, $text, $user['id']);
-
-                    header("Location:$refferer");
-                    exit();
+                if (!empty($_POST["g-recaptcha-response"])){
+                    if (
+                        $this->chekedName() === true
+                        && filter_var($email, FILTER_VALIDATE_EMAIL) !== false
+                        && System::reCaptcha()
+                        )
+                    {
+                        $this->model->addFeedback($name, $email, $text, $user['id']);
+                        header("Location:$refferer");
+                        exit();
+                    }
+                }
+                else {
+                    $msg = 'The captcha code was not tested on the server1';
                 }
             }
 
@@ -61,6 +71,7 @@ class FeedbackController extends UserModel
 
         return $this->inner = Templater::view('feedback', [
             'email' => $email,
+            'msg' => $msg,
             'msgText' => $msgText,
             'name' => $name,
             'text' => $text,
@@ -75,7 +86,7 @@ class FeedbackController extends UserModel
             return Templater::view('feedbackShow', ['feedback' => $this->model->getAllFeedback()]);
         }
         else{
-            header("Location:../public");
+            header("Location:http://bwttest/");
         }
     }
 }
