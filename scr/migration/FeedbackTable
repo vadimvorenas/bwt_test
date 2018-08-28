@@ -8,3 +8,6 @@ CREATE TABLE feedback
     create_date timestamp DEFAULT current_timestamp
 );
 CREATE UNIQUE INDEX feedback_id_uindex ON feedback (id);
+ALTER TABLE feedback
+ADD CONSTRAINT feedback_users_id_fk_2
+FOREIGN KEY (id_user) REFERENCES users (id) ON DELETE SET NULL ON UPDATE CASCADE;
