@@ -68,6 +68,9 @@ class Route
                     $controller = $controllers[\Scr\Controller\FeedbackController::class]();
                     echo $controller->$action();
                     break;
+                default:
+                    $controller = $controllers[\Scr\Controller\Controller::class]();
+                    echo $controller->notFound();
             }
         }
         catch (\Throwable $throwable) {

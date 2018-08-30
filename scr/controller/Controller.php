@@ -16,4 +16,9 @@ class Controller
     {
         return Templater::view('index');
     }
+
+    public function notFound()
+    {
+        return Templater::view('404');
+    }
 }
